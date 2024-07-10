@@ -1,30 +1,33 @@
 <api xmlns="http://ws.apache.org/ns/synapse" name="DynamicEndpointAPI" context="/dynamicEndpoint">
     <resource methods="GET" uri-template="/route">
         <inSequence>
-            <sequence key="RequestLogger.xml"/>
-            <property name="targetEP" expression="get-property('transport', 'targetEP')" scope="default" type="STRING"/>
+			<sequence key="RequestLogger"/>
+			<property name="targetEP" expression="get-property('transport', 'targetEP')" scope="default" type="STRING"/>
             <filter source="$ctx:targetEP" regex="endpoint1">
                 <then>
-					<header name="epTest" action="set" scope="default" value="Llamando al 1"/>
+					<header name="epTest" action="set" scope="transport" value="Llamando al 1"/>
                     <call>
-                        <endpoint key="Endpoint1.xml"/>
+						<endpoint key="Endpoint1"/>
 					</call>
 				</then>
                 <else>
                     <call>
-                        <endpoint key="Endpoint2.xml"/>
+						<endpoint key="Endpoint2"/>
 					</call>
 				</else>
-            </filter>
+			</filter>
             <log level="custom">
-                <property name="STATUS" value="Request processed"/>
-            </log>
-        </inSequence>
+				<property name="STATUS" value="Request processed"/>
+			</log>
+			<respond description="vuelta"/>
+		</inSequence>
+        <outSequence>
+		</outSequence>         
         <faultSequence>
             <log level="custom">
                 <property name="ERROR" expression="get-property('ERROR_MESSAGE')"/>
-            </log>
+			</log>
             <respond/>
-        </faultSequence>
+		</faultSequence>
     </resource>
 </api>
