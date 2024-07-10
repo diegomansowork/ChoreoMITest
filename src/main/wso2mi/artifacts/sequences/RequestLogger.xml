@@ -1,0 +1,6 @@
+<sequence xmlns="http://ws.apache.org/ns/synapse" name="RequestLogger">
+    <log level="custom">
+        <property name="REQUEST" expression="get-property('To')"/>
+        <property name="HTTP_METHOD" expression="get-property('axis2', 'HTTP_METHOD')"/>
+    </log>
+</sequence>

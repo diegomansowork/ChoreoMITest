@@ -1,0 +1,3 @@
+<endpoint xmlns="http://ws.apache.org/ns/synapse" name="Endpoint2">
+    <address uri="http://example.com/service2"/>
+</endpoint>
