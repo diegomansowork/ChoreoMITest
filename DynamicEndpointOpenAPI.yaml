@@ -18,6 +18,12 @@ paths:
           explode: false
           schema:
             type: string
+        - name: targetAlt
+          in: query
+          required: false
+          explode: false
+          schema:
+            type: string
       responses:
         default:
           description: Default response
